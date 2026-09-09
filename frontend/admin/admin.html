@@ -13,83 +13,85 @@
 </head>
 <body id="adminBody" class="hidden bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-white">
 
-  <!-- Top Navbar -->
+  <!-- Top Navbar (Mobile-friendly) -->
   <header class="w-full bg-white border-b border-slate-100 sticky top-0 z-30 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <span class="text-2xl">🍽️</span>
-        <span class="text-xl font-black tracking-tight">Kin<span class="text-amber-500">RaiDee</span></span>
-        <span class="text-xs text-slate-400 font-semibold ml-2">Admin Dashboard</span>
+    <div class="max-w-7xl mx-auto px-3.5 sm:px-6 h-16 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-2.5 truncate">
+        <span class="text-xl sm:text-2xl shrink-0">🍽️</span>
+        <span class="text-lg sm:text-xl font-black tracking-tight whitespace-nowrap">Kin<span class="text-amber-500">RaiDee</span></span>
+        <span class="hidden md:inline-block text-xs text-slate-400 font-semibold ml-2">Admin Dashboard</span>
       </div>
 
-      <div class="flex items-center gap-3">
-        <a href="admin_edit.html" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition shadow-sm flex items-center gap-1.5">
-          <span>➕</span> เพิ่มเมนูใหม่
+      <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        <a href="admin_edit.html" class="px-2.5 py-2 sm:px-4 sm:py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition shadow-sm flex items-center gap-1 whitespace-nowrap">
+          <span>➕</span>
+          <span class="hidden sm:inline">เพิ่มเมนูใหม่</span>
+          <span class="sm:hidden">เพิ่ม</span>
         </a>
-        <a href="../index.html" class="px-3.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-bold transition">
-          ดูหน้าเว็บ
+        <a href="../index.html" class="px-2.5 py-2 sm:px-3.5 sm:py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-bold transition whitespace-nowrap">
+          หน้าเว็บ
         </a>
-        <button onclick="handleLogout()" class="px-3.5 py-2 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 text-xs font-bold transition">
-          ออกจากระบบ
+        <button onclick="handleLogout()" class="px-2.5 py-2 sm:px-3.5 sm:py-2 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 text-xs font-bold transition whitespace-nowrap">
+          ออก
         </button>
       </div>
     </div>
   </header>
 
   <!-- Main Container -->
-  <main class="max-w-7xl mx-auto px-6 py-8 w-full flex-grow">
+  <main class="max-w-7xl mx-auto px-3.5 sm:px-6 py-6 sm:py-8 w-full flex-grow">
     
-    <!-- 3 Stat Cards แนวนอนด้านบน (ตามรูปที่ 2) -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
+    <!-- 3 Stat Cards ด้านบน -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-5 mb-6 sm:mb-8">
       
       <!-- Card 1: จำนวนเมนูทั้งหมด -->
-      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-2xl shrink-0">
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-4">
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-amber-50 flex items-center justify-center text-xl sm:text-2xl shrink-0">
           📋
         </div>
         <div>
           <div class="text-[11px] font-bold text-slate-400">จำนวนเมนูทั้งหมด</div>
-          <div id="statTotalCount" class="text-xl font-black text-slate-900 mt-0.5">กำลังโหลด...</div>
+          <div id="statTotalCount" class="text-lg sm:text-xl font-black text-slate-900 mt-0.5">กำลังโหลด...</div>
         </div>
       </div>
 
       <!-- Card 2: เมนูที่ถูกสุ่มบ่อยสุด -->
-      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center text-2xl shrink-0">
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-4">
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center text-xl sm:text-2xl shrink-0">
           🔥
         </div>
         <div class="min-w-0">
           <div class="text-[11px] font-bold text-slate-400">เมนูที่ถูกสุ่มบ่อยสุด</div>
-          <div id="statTopRandomed" class="text-xl font-black text-slate-900 mt-0.5 truncate">กำลังโหลด...</div>
+          <div id="statTopRandomed" class="text-lg sm:text-xl font-black text-slate-900 mt-0.5 truncate">กำลังโหลด...</div>
         </div>
       </div>
 
       <!-- Card 3: หมวดหมู่ที่มีเยอะที่สุด -->
-      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center text-2xl shrink-0">
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-4">
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center text-xl sm:text-2xl shrink-0">
           🏷️
         </div>
         <div class="min-w-0">
           <div class="text-[11px] font-bold text-slate-400">หมวดหมู่ที่มีเยอะที่สุด</div>
-          <div id="statTopCategory" class="text-xl font-black text-slate-900 mt-0.5 truncate">กำลังโหลด...</div>
+          <div id="statTopCategory" class="text-lg sm:text-xl font-black text-slate-900 mt-0.5 truncate">กำลังโหลด...</div>
         </div>
       </div>
 
     </div>
 
     <!-- ตารางจัดการข้อมูลเมนูอาหาร -->
-    <div class="bg-white rounded-3xl border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 sm:p-8">
+    <div class="bg-white rounded-3xl border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-4 sm:p-8">
       
       <!-- แถวหัวข้อ + ช่องค้นหา และ กรองหมวดหมู่ -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
         <div>
-          <h2 class="text-xl font-black text-slate-900">จัดการข้อมูลเมนูอาหาร</h2>
+          <h2 class="text-lg sm:text-xl font-black text-slate-900">จัดการข้อมูลเมนูอาหาร</h2>
           <p class="text-xs text-slate-400 mt-0.5">ตรวจสอบ แก้ไข หรือลบรายการเมนูในระบบ</p>
         </div>
 
         <div class="flex items-center gap-2.5 flex-wrap">
           <!-- ช่องค้นหาชื่อเมนู -->
-          <div class="relative w-48 sm:w-56">
+          <div class="relative w-full sm:w-56">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">🔍</span>
             <input 
               type="text" 
@@ -104,7 +106,7 @@
           <select 
             id="filterCategorySelect" 
             onchange="filterTableData()" 
-            class="px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 font-semibold focus:outline-none focus:border-amber-500 transition"
+            class="w-full sm:w-auto px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 font-semibold focus:outline-none focus:border-amber-500 transition"
           >
             <option value="ทั้งหมด">หมวดหมู่ทั้งหมด</option>
             <option value="อาหารจานเดียว">อาหารจานเดียว</option>
@@ -115,12 +117,12 @@
         </div>
       </div>
 
-      <!-- เนื้อหาตาราง -->
-      <div class="overflow-x-auto mt-2">
-        <table class="w-full text-left text-xs">
+      <!-- เนื้อหาตาราง (เพิ่ม min-w ป้องกันรูปและข้อมูลถูกบีบ) -->
+      <div class="overflow-x-auto mt-2 -mx-4 sm:mx-0 px-4 sm:px-0">
+        <table class="w-full min-w-[700px] text-left text-xs">
           <thead class="text-slate-400 font-bold border-b border-slate-100">
             <tr>
-              <th class="py-4 px-3">รูป</th>
+              <th class="py-4 px-3 w-16">รูป</th>
               <th class="py-4 px-4">ชื่อเมนู</th>
               <th class="py-4 px-4">หมวดหมู่</th>
               <th class="py-4 px-4 text-center">ราคา</th>
