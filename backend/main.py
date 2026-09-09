@@ -154,12 +154,12 @@ INITIAL_MENUS = [
         "random_count": 18
     },
     {
-        "name": "แกงแดงไก่",
+        "name": "กุ้งแกงส้มป๊อปอาย",
         "category": "ต้ม/แกง",
-        "price": 75.0,
+        "price": 157.0,
         "calories": 430,
         "spiciness": 2,
-        "ingredients": "ไก่, กะทิ, พริกแกงแดง",
+        "ingredients": "กุ้ง, กะทิ, พริกแกงแดง",
         "restaurant_name": "Have A Seat",
         "image_url": "https://images.unsplash.com/photo-1548943487-a2e4e43b4853?auto=format&fit=crop&w=600&q=80",
         "recipe_summary": "ทริก: กะทิเข้มข้นแบบไม่หวานจัด เผ็ดกำลังดี ลูกค้ารีวิวชมว่าราคาคุ้มมาก",
