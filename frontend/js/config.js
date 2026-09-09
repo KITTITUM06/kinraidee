@@ -1,5 +1,5 @@
 // Base API Endpoint สำหรับเชื่อมต่อกับ FastAPI (main.py)
-const API_BASE = "http://127.0.0.1:8000/api";
+const API_BASE = "https://kinraidee-api.onrender.com/api";
 
 // ระบบควบคุมธีมสลับ 2 โทนสี (Light / Dark Mode)
 function initTheme() {
