@@ -82,7 +82,7 @@ INITIAL_MENUS = [
         "random_count": 58
     },
     {
-        "name": "ข้าวกุ้งผัด",
+        "name": "ข้าวผัดกุ้ง",
         "category": "อาหารจานเดียว",
         "price": 40.0,
         "calories": 480,
@@ -262,7 +262,7 @@ INITIAL_MENUS = [
         "random_count": 44
     },
     {
-        "name": "กะเพราไก่แท้",
+        "name": "กะเพราไก่",
         "category": "อาหารจานเดียว",
         "price": 50.0,
         "calories": 460,
