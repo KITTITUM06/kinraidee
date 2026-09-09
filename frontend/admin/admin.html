@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KinRaiDee - จัดการข้อมูลเมนูอาหาร</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body { font-family: 'Kanit', sans-serif; }
+  </style>
+</head>
+<body id="adminBody" class="hidden bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-white">
+
+  <!-- Top Navbar -->
+  <header class="w-full bg-white border-b border-slate-100 sticky top-0 z-30 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="text-2xl">🍽️</span>
+        <span class="text-xl font-black tracking-tight">Kin<span class="text-amber-500">RaiDee</span></span>
+        <span class="text-xs text-slate-400 font-semibold ml-2">Admin Dashboard</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="admin_edit.html" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition shadow-sm flex items-center gap-1.5">
+          <span>➕</span> เพิ่มเมนูใหม่
+        </a>
+        <a href="../index.html" class="px-3.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-bold transition">
+          ดูหน้าเว็บ
+        </a>
+        <button onclick="handleLogout()" class="px-3.5 py-2 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 text-xs font-bold transition">
+          ออกจากระบบ
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-6 py-8 w-full flex-grow">
+    
+    <!-- 3 Stat Cards แนวนอนด้านบน (ตามรูปที่ 2) -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
+      
+      <!-- Card 1: จำนวนเมนูทั้งหมด -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-2xl shrink-0">
+          📋
+        </div>
+        <div>
+          <div class="text-[11px] font-bold text-slate-400">จำนวนเมนูทั้งหมด</div>
+          <div id="statTotalCount" class="text-xl font-black text-slate-900 mt-0.5">กำลังโหลด...</div>
+        </div>
+      </div>
+
+      <!-- Card 2: เมนูที่ถูกสุ่มบ่อยสุด -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center text-2xl shrink-0">
+          🔥
+        </div>
+        <div class="min-w-0">
+          <div class="text-[11px] font-bold text-slate-400">เมนูที่ถูกสุ่มบ่อยสุด</div>
+          <div id="statTopRandomed" class="text-xl font-black text-slate-900 mt-0.5 truncate">กำลังโหลด...</div>
+        </div>
+      </div>
+
+      <!-- Card 3: หมวดหมู่ที่มีเยอะที่สุด -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center text-2xl shrink-0">
+          🏷️
+        </div>
+        <div class="min-w-0">
+          <div class="text-[11px] font-bold text-slate-400">หมวดหมู่ที่มีเยอะที่สุด</div>
+          <div id="statTopCategory" class="text-xl font-black text-slate-900 mt-0.5 truncate">กำลังโหลด...</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ตารางจัดการข้อมูลเมนูอาหาร -->
+    <div class="bg-white rounded-3xl border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 sm:p-8">
+      
+      <!-- แถวหัวข้อ + ช่องค้นหา และ กรองหมวดหมู่ -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+        <div>
+          <h2 class="text-xl font-black text-slate-900">จัดการข้อมูลเมนูอาหาร</h2>
+          <p class="text-xs text-slate-400 mt-0.5">ตรวจสอบ แก้ไข หรือลบรายการเมนูในระบบ</p>
+        </div>
+
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <!-- ช่องค้นหาชื่อเมนู -->
+          <div class="relative w-48 sm:w-56">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">🔍</span>
+            <input 
+              type="text" 
+              id="searchMenuInput" 
+              oninput="filterTableData()" 
+              placeholder="ค้นหาชื่อเมนู..." 
+              class="w-full pl-8 pr-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-amber-500 transition"
+            >
+          </div>
+
+          <!-- ตัวเลือกหมวดหมู่ -->
+          <select 
+            id="filterCategorySelect" 
+            onchange="filterTableData()" 
+            class="px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 font-semibold focus:outline-none focus:border-amber-500 transition"
+          >
+            <option value="ทั้งหมด">หมวดหมู่ทั้งหมด</option>
+            <option value="อาหารจานเดียว">อาหารจานเดียว</option>
+            <option value="เมนูเส้น">เมนูเส้น</option>
+            <option value="ต้ม/แกง">ต้ม/แกง</option>
+            <option value="คลีน/สุขภาพ">คลีน/สุขภาพ</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- เนื้อหาตาราง -->
+      <div class="overflow-x-auto mt-2">
+        <table class="w-full text-left text-xs">
+          <thead class="text-slate-400 font-bold border-b border-slate-100">
+            <tr>
+              <th class="py-4 px-3">รูป</th>
+              <th class="py-4 px-4">ชื่อเมนู</th>
+              <th class="py-4 px-4">หมวดหมู่</th>
+              <th class="py-4 px-4 text-center">ราคา</th>
+              <th class="py-4 px-4 text-center">แคลอรี่</th>
+              <th class="py-4 px-4 text-center">ความเผ็ด</th>
+              <th class="py-4 px-4 text-center">สุ่มแล้ว (ครั้ง)</th>
+              <th class="py-4 px-4 text-center">จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="menuTableBody" class="divide-y divide-slate-100 font-medium">
+            <tr>
+              <td colspan="8" class="py-12 text-center text-slate-400">กำลังโหลดข้อมูล...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/ui_feedback.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

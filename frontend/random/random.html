@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KinRaiDee - สุ่มเมนูอาหาร</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="random.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#f59e0b', 600: '#d97706' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-[#090d16] dark:text-slate-100 min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-amber-500 selection:text-white relative bg-dots-pattern">
+
+  <!-- Sidebar Overlay -->
+  <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+
+  <!-- Sidebar Drawer -->
+  <aside id="sidebarDrawer" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 z-50 -translate-x-full transition-transform duration-300 flex flex-col justify-between p-6 shadow-2xl">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">🍽️</span>
+          <span class="text-xl font-black tracking-tight">Kin<span class="text-amber-500">RaiDee</span></span>
+        </div>
+        <button onclick="toggleSidebar()" class="p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- รายการเมนูหลัก (Active อยู่ที่ สุ่มเมนูอาหาร) -->
+      <nav class="mt-6 space-y-1.5">
+        <a href="../index.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 font-semibold text-sm transition">
+          <span>🏠</span> หน้าหลัก
+        </a>
+        <a href="random.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-sm transition">
+          <span>🎲</span> สุ่มเมนูอาหาร (Gacha)
+        </a>
+        <a href="../catalog/catalog.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 font-semibold text-sm transition">
+          <span>🧊</span> คลังอาหาร & เคลียร์ตู้เย็น
+        </a>
+      </nav>
+    </div>
+
+    <!-- ส่วนล่าง Sidebar: Avatar + ปุ่มตั้งค่าพร้อมป๊อปอัป -->
+    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 relative">
+      <div id="settingsDropdown" class="hidden absolute bottom-20 left-0 right-0 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-2 shadow-2xl space-y-1 z-50">
+        <div class="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          เลือกโหมดการใช้งาน
+        </div>
+        <a href="../index.html" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span class="w-6 h-6 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-sm">👤</span>
+          <span>โหมดผู้ใช้ทั่วไป (User)</span>
+        </a>
+        <a href="../admin/login/admin_login.html" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span class="w-6 h-6 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center text-sm">🔐</span>
+          <span>เข้าสู่ระบบ Admin</span>
+        </a>
+      </div>
+
+      <div class="flex items-center justify-between p-2 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-lg overflow-hidden shrink-0 border border-amber-500/30">
+          🧑‍💻
+        </div>
+        <button type="button" onclick="toggleSettingsMenu(event)" title="การตั้งค่าและสลับโหมด" class="p-2.5 rounded-xl text-slate-500 dark:text-slate-400 hover:text-amber-500 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- แสงไฟเรืองแสง Ambient Stage Light ด้านหลัง (คงเดิม) -->
+  <div class="fixed top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-gradient-to-b from-amber-500/15 via-orange-500/10 to-transparent rounded-full blur-[140px] pointer-events-none -z-10"></div>
+
+  <!-- ของตกแต่งลอยรอบฉาก (Floating Food Icons) (คงเดิม) -->
+  <div class="floating-elem-1 absolute top-28 left-8 sm:left-24 text-3xl sm:text-4xl opacity-40 select-none pointer-events-none">🍤</div>
+  <div class="floating-elem-2 absolute top-48 right-8 sm:right-28 text-3xl sm:text-4xl opacity-40 select-none pointer-events-none">🥬</div>
+  <div class="floating-elem-3 absolute bottom-36 left-12 sm:left-36 text-2xl sm:text-3xl opacity-35 select-none pointer-events-none">🌶️</div>
+  <div class="floating-elem-4 absolute bottom-44 right-12 sm:right-36 text-3xl sm:text-4xl opacity-35 select-none pointer-events-none">🍳</div>
+
+  <!-- Header ยืดเต็มจอพร้อมปุ่ม Hamburger และปุ่มไปหน้าคลังตู้เย็น -->
+  <header class="w-full px-6 sm:px-8 py-4 border-b border-slate-200/80 dark:border-slate-800/80 flex justify-between items-center bg-white/70 dark:bg-[#090d16]/70 backdrop-blur-xl sticky top-0 z-40">
+    <div class="flex items-center gap-4">
+      <button onclick="toggleSidebar()" aria-label="Open Menu" class="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:scale-105 active:scale-95 transition shadow-sm">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+      <a href="../index.html" class="flex items-center gap-2.5 text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-amber-500 transition">
+        <span class="text-xl">🍽️</span>
+        <span class="text-xl font-black tracking-tight">Kin<span class="text-amber-500">RaiDee</span></span>
+      </a>
+    </div>
+    
+    <div class="flex items-center gap-3">
+      <button id="themeToggleBtn" aria-label="Toggle Theme" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 shadow-sm hover:scale-105 transition">
+        <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+        <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+      </button>
+      <a href="../catalog/catalog.html" class="text-xs bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 font-bold px-4 py-2.5 rounded-xl border border-amber-500/30 transition flex items-center gap-1.5 shadow-sm">
+        <span>🧊</span> คลังตู้เย็น
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Stage (คงเดิม 100%) -->
+  <main class="max-w-5xl mx-auto w-full px-4 sm:px-6 py-6 flex flex-col items-center justify-center flex-grow text-center relative z-10">
+    
+    <!-- Title & Subtitle -->
+    <div class="mb-5">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-extrabold mb-3">
+        🎲 RANDOM GACHA ARENA
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 tracking-tight leading-none mb-2">
+        เปิดฝาชีวัดดวง!
+      </h1>
+      <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm font-medium">
+        กดปุ่มด้านล่างเพื่อให้ระบบหมุนสลับฝาชีวัดชะตามื้อนี้
+      </p>
+    </div>
+
+    <!-- แถบเลือกหมวดหมู่อาหาร (จะแสดงตอนมีฝาชี และซ่อนเมื่อผลลัพธ์ออก) -->
+    <div id="categoryBar" class="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap mb-6 bg-white/70 dark:bg-slate-900/70 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-md shadow-sm transition-all duration-300">
+      <button onclick="setCategory('ทั้งหมด', this)" class="cat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold border border-transparent transition">
+        🍽️ ทั้งหมด
+      </button>
+      <button onclick="setCategory('อาหารจานเดียว', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 transition">
+        🍛 จานเดียว
+      </button>
+      <button onclick="setCategory('เมนูเส้น', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 transition">
+        🍜 เมนูเส้น
+      </button>
+      <button onclick="setCategory('ต้ม/แกง', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 transition">
+        🍲 ต้ม/แกง
+      </button>
+      <button onclick="setCategory('คลีน/สุขภาพ', this)" class="cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 transition">
+        🥗 คลีน/สุขภาพ
+      </button>
+    </div>
+
+    <!-- แท่นวางฝาชี 3 อัน -->
+    <div id="lidWrapper" class="relative w-full max-w-2xl py-6 flex items-end justify-center gap-3 sm:gap-8 mb-4">
+      
+      <!-- ฝาชี 1 (ซ้าย) -->
+      <div id="lid1" class="lid-item flex flex-col items-center transition-all duration-300">
+        <svg class="w-32 h-32 sm:w-44 sm:h-44 drop-shadow-2xl" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="45" r="14" fill="#F59E0B" stroke="#B45309" stroke-width="4"/>
+          <path d="M96 57H104V68H96V57Z" fill="#D97706"/>
+          <path d="M20 145C20 85 55 65 100 65C145 65 180 85 180 145H20Z" fill="url(#lidGrad1)" stroke="#F59E0B" stroke-width="4"/>
+          <rect x="12" y="145" width="176" height="14" rx="7" fill="#D97706" stroke="#92400E" stroke-width="3"/>
+          <defs><linearGradient id="lidGrad1" x1="20" y1="65" x2="180" y2="145" gradientUnits="userSpaceOnUse"><stop stop-color="#FDE68A"/><stop offset="0.4" stop-color="#F59E0B"/><stop offset="1" stop-color="#B45309"/></linearGradient></defs>
+        </svg>
+        <div class="stage-plate w-32 sm:w-44 h-4 rounded-full -mt-2 border border-slate-300/80 dark:border-slate-700/80"></div>
+      </div>
+
+      <!-- ฝาชี 2 (กลาง) -->
+      <div id="lid2" class="lid-item flex flex-col items-center transition-all duration-300 scale-110 relative -top-3">
+        <div class="absolute -bottom-4 w-40 h-8 bg-amber-500/25 rounded-full blur-lg pointer-events-none"></div>
+        <svg class="w-40 h-40 sm:w-52 sm:h-52 drop-shadow-2xl" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="45" r="14" fill="#F59E0B" stroke="#B45309" stroke-width="4"/>
+          <path d="M96 57H104V68H96V57Z" fill="#D97706"/>
+          <path d="M20 145C20 85 55 65 100 65C145 65 180 85 180 145H20Z" fill="url(#lidGrad2)" stroke="#F59E0B" stroke-width="4"/>
+          <rect x="12" y="145" width="176" height="14" rx="7" fill="#D97706" stroke="#92400E" stroke-width="3"/>
+          <defs><linearGradient id="lidGrad2" x1="20" y1="65" x2="180" y2="145" gradientUnits="userSpaceOnUse"><stop stop-color="#FDE68A"/><stop offset="0.4" stop-color="#F59E0B"/><stop offset="1" stop-color="#B45309"/></linearGradient></defs>
+        </svg>
+        <div class="stage-plate w-40 sm:w-52 h-5 rounded-full -mt-2.5 border-2 border-amber-400/40 dark:border-amber-400/20"></div>
+      </div>
+
+      <!-- ฝาชี 3 (ขวา) -->
+      <div id="lid3" class="lid-item flex flex-col items-center transition-all duration-300">
+        <svg class="w-32 h-32 sm:w-44 sm:h-44 drop-shadow-2xl" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="45" r="14" fill="#F59E0B" stroke="#B45309" stroke-width="4"/>
+          <path d="M96 57H104V68H96V57Z" fill="#D97706"/>
+          <path d="M20 145C20 85 55 65 100 65C145 65 180 85 180 145H20Z" fill="url(#lidGrad3)" stroke="#F59E0B" stroke-width="4"/>
+          <rect x="12" y="145" width="176" height="14" rx="7" fill="#D97706" stroke="#92400E" stroke-width="3"/>
+          <defs><linearGradient id="lidGrad3" x1="20" y1="65" x2="180" y2="145" gradientUnits="userSpaceOnUse"><stop stop-color="#FDE68A"/><stop offset="0.4" stop-color="#F59E0B"/><stop offset="1" stop-color="#B45309"/></linearGradient></defs>
+        </svg>
+        <div class="stage-plate w-32 sm:w-44 h-4 rounded-full -mt-2 border border-slate-300/80 dark:border-slate-700/80"></div>
+      </div>
+
+    </div>
+
+    <!-- การ์ดแสดงผลลัพธ์ขนาดใหญ่ -->
+    <div id="resultCard" class="hidden w-full max-w-lg bg-white dark:bg-slate-900 rounded-[2.5rem] p-6 sm:p-8 shadow-2xl border-2 border-amber-400/80 text-left transition-all duration-300 mb-6 glow-gold">
+      
+      <div class="relative h-64 sm:h-72 rounded-3xl overflow-hidden bg-slate-100 dark:bg-slate-800 shadow-inner">
+        <img id="resImage" src="" class="w-full h-full object-cover">
+        <span id="resCategory" class="absolute top-4 left-4 bg-slate-900/85 backdrop-blur-md text-white text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full shadow"></span>
+        <span id="resPrice" class="absolute top-4 right-4 bg-amber-500 text-white text-base sm:text-lg font-black px-4 py-1.5 rounded-full shadow-lg"></span>
+      </div>
+
+      <div class="mt-6 mb-4">
+        <div class="flex items-center justify-between gap-3 mb-1">
+          <h2 id="resName" class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight truncate"></h2>
+          <div id="resSpice" class="shrink-0"></div>
+        </div>
+        <p id="resIngredients" class="text-xs sm:text-sm text-slate-400 line-clamp-1 mt-1 font-normal"></p>
+        <div id="resCalories" class="mt-3 text-sm sm:text-base font-bold text-amber-500"></div>
+      </div>
+
+      <a id="resMapLink" href="javascript:void(0)" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-bold py-3.5 px-4 rounded-2xl transition shadow-lg flex items-center justify-center gap-2">
+        <span>📍 พิกัดร้าน:</span> <span id="resRestName" class="underline truncate max-w-[220px]"></span>
+      </a>
+    </div>
+
+    <!-- ส่วนควบคุม: "ในคลังมี: X รายการ" และปุ่มสุ่ม -->
+    <div class="flex flex-col items-center gap-3 w-full max-w-xs relative z-20">
+      
+      <div id="poolCountWrapper" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-500 dark:text-slate-400 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>ในคลังมี:</span>
+        <b id="poolCountBadge" class="text-slate-800 dark:text-slate-200">กำลังโหลด...</b>
+      </div>
+
+      <!-- ปุ่มสุ่มเมนู (รอบแรก) -->
+      <button type="button" id="spinBtn" onclick="handleGacha(event)" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 hover:from-amber-600 hover:to-orange-600 text-white font-black py-4 px-8 rounded-2xl shadow-xl shadow-amber-500/25 transition transform active:scale-95 text-lg sm:text-xl flex items-center justify-center gap-2">
+        <span>🍽️</span> สุ่มเมนูวันนี้เลย!
+      </button>
+
+      <!-- ปุ่มสุ่มใหม่อีกรอบ -->
+      <button type="button" id="retryBtn" onclick="handleReroll(event)" class="hidden w-full bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-800 dark:hover:bg-slate-700 border-2 border-amber-400/50 hover:border-amber-400 font-bold py-4 px-6 rounded-2xl shadow-xl transition transform active:scale-95 text-base sm:text-lg flex items-center justify-center gap-2.5">
+        <span class="text-amber-400 text-xl">🔄</span> สุ่มใหม่อีกรอบ
+      </button>
+    </div>
+
+  </main>
+
+  <footer class="py-5 text-center text-xs text-slate-400 border-t border-slate-200/80 dark:border-slate-800/80 bg-white/40 dark:bg-[#090d16]/40 backdrop-blur-md">
+    KinRaiDee Gacha System • 3-Lid Shuffle Mode
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/ui_feedback.js"></script>
+  <script src="random.js"></script>
+</body>
+</html>

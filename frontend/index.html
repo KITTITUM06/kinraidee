@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KinRaiDee - คิดไม่ออกบอกกินไรดี</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#f59e0b', 600: '#d97706' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-[#090d16] dark:text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-white overflow-x-hidden">
+
+  <!-- Sidebar Overlay -->
+  <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+
+  <!-- Sidebar Drawer -->
+  <aside id="sidebarDrawer" class="fixed top-0 left-0 h-full w-72 bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 z-50 -translate-x-full transition-transform duration-300 flex flex-col justify-between p-6 shadow-2xl">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">🍽️</span>
+          <span class="text-xl font-black tracking-tight">Kin<span class="text-amber-500">RaiDee</span></span>
+        </div>
+        <button onclick="toggleSidebar()" class="p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <nav class="mt-6 space-y-1.5">
+        <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-sm transition">
+          <span>🏠</span> หน้าหลัก
+        </a>
+        <a href="random/random.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 font-semibold text-sm transition">
+          <span>🎲</span> สุ่มเมนูอาหาร (Gacha)
+        </a>
+        <a href="catalog/catalog.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 font-semibold text-sm transition">
+          <span>🧊</span> คลังอาหาร & เคลียร์ตู้เย็น
+        </a>
+      </nav>
+    </div>
+
+    <!-- ส่วนล่าง Sidebar -->
+    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 relative">
+      <div id="settingsDropdown" class="hidden absolute bottom-20 left-0 right-0 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-2 shadow-2xl space-y-1 z-50">
+        <div class="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          เลือกโหมดการใช้งาน
+        </div>
+        <a href="index.html" onclick="toggleSidebar()" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span class="w-6 h-6 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-sm">👤</span>
+          <span>โหมดผู้ใช้ทั่วไป (User)</span>
+        </a>
+        <a href="admin/login/admin_login.html" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span class="w-6 h-6 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center text-sm">🔐</span>
+          <span>เข้าสู่ระบบ Admin</span>
+        </a>
+      </div>
+
+      <div class="flex items-center justify-between p-2 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-lg overflow-hidden shrink-0 border border-amber-500/30">
+          🧑‍💻
+        </div>
+        <button type="button" onclick="toggleSettingsMenu(event)" title="การตั้งค่าและสลับโหมด" class="p-2.5 rounded-xl text-slate-500 dark:text-slate-400 hover:text-amber-500 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Top Header / Bar -->
+  <header class="sticky top-0 z-40 w-full glass-nav bg-white/80 dark:bg-[#090d16]/80 border-b border-slate-200 dark:border-slate-800">
+    <div class="w-full px-6 sm:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <button onclick="toggleSidebar()" aria-label="Open Menu" class="p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:scale-105 active:scale-95 transition shadow-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="text-2xl">🍽️</span>
+          <span class="text-2xl font-black tracking-tight">Kin<span class="text-amber-500">RaiDee</span></span>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[11px] font-extrabold border border-orange-500/20">มอนอ NU</span>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- ปุ่มแนะนำเมนูเด็ดรอบ ม. -->
+        <button onclick="openSuggestModal()" class="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-amber-500/20 transition transform active:scale-95 flex items-center gap-1.5">
+          <span>✨</span> <span class="hidden sm:inline">แนะนำเมนูเด็ดรอบ ม.</span><span class="sm:hidden">แนะนำร้าน</span>
+        </button>
+
+        <button id="themeToggleBtn" aria-label="Toggle Theme" class="p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:scale-105 transition shadow-sm">
+          <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+          <svg id="moonIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Bento Section -->
+  <main class="max-w-7xl mx-auto px-6 pt-10 pb-16 w-full flex-grow">
+    
+    <div class="text-center max-w-4xl mx-auto mb-10">
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-3">
+        มื้อนี้กินอะไรดี? <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 inline-block mt-1">
+          เปิดฝาชีสุ่ม หรือเคลียร์ของใน<span class="whitespace-nowrap">ตู้เย็น</span>
+        </span>
+      </h1>
+      <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base max-w-lg mx-auto">
+        รวบรวมเมนูลับและลายแทงรอบ ม.นเรศวร โดยเด็ก มอนอ
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Bento 1: การ์ดสุ่มหลัก (8 Cols) -->
+      <div class="bento-card lg:col-span-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-sm relative overflow-hidden">
+        <div class="absolute -right-8 -bottom-10 opacity-5 dark:opacity-10 text-[200px] select-none pointer-events-none">🍲</div>
+        <div>
+          <span class="px-3 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 rounded-full text-xs font-extrabold tracking-wider">NU GACHA SYSTEM</span>
+          <h2 class="text-3xl font-black mt-4 mb-2">สุ่มเมนูเด็ดวัดดวง</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base max-w-lg">
+            เลิกเถียงกันว่าจะกินอะไร ระบบจะสุ่มเมนูเด็ดพร้อมพิกัดร้านรอบ ม.นเรศวร ให้คุณทันที
+          </p>
+        </div>
+        <div class="mt-8 flex items-center">
+          <a href="random/random.html" class="px-8 py-4 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-lg shadow-lg shadow-amber-500/25 transition transform active:scale-95">
+            🃏 เริ่มสุ่มเมนูทันที
+          </a>
+        </div>
+      </div>
+
+      <!-- Bento 2: คลังตู้เย็น (4 Cols) -->
+      <div class="bento-card lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-between shadow-sm">
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center text-2xl mb-6">🧊</div>
+          <h3 class="text-xl font-bold mb-2">เด็กหอของเหลือ?</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+            เลือกของที่มีติดตู้เย็นในหอพัก เช่น ไข่ เส้นมาม่า หมูสับ เพื่อหาเมนูปรุงเองง่ายๆ
+          </p>
+        </div>
+        <div class="mt-6">
+          <a href="catalog/catalog.html" class="block w-full text-center py-3.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500 font-bold text-sm transition">
+            เปิดตัวช่วยเคลียร์ตู้เย็น
+          </a>
+        </div>
+      </div>
+
+      <!-- Bento 3: สถิติฐานข้อมูล (4 Cols) -->
+      <div class="bento-card lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
+        <div>
+          <h3 class="font-bold text-sm mb-4 flex items-center gap-2">
+            <span>📊</span> สถิติเมนูรอบ มอนอ
+          </h3>
+          <div class="space-y-3 text-xs">
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/60 flex justify-between items-center">
+              <span class="text-slate-500 dark:text-slate-400">จำนวนเมนูในระบบ:</span>
+              <span id="homeTotalMenus" class="font-bold text-slate-800 dark:text-white">กำลังโหลด...</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/60 flex flex-col gap-1.5">
+              <span class="text-slate-500 dark:text-slate-400">เมนูที่เด็ก ม. สุ่มบ่อยสุด:</span>
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <span id="homePopularName" class="font-bold text-amber-500 text-sm break-words">กำลังโหลด...</span>
+                <span id="homePopularBadge" class="hidden px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 font-extrabold text-[11px] shrink-0">-</span>
+              </div>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/60 flex justify-between items-center">
+              <span class="text-slate-500 dark:text-slate-400">หมวดหมู่ยอดนิยม:</span>
+              <span id="homeTopCat" class="font-bold text-slate-800 dark:text-white text-right break-words">กำลังโหลด...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento 4: Trending Today (8 Cols) -->
+      <div class="bento-card lg:col-span-8 bg-gradient-to-br from-amber-500/10 via-white to-orange-500/10 dark:from-amber-500/5 dark:via-slate-900 dark:to-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        <div class="flex items-center gap-5 w-full sm:w-auto">
+          <div class="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-4xl shrink-0 shadow-inner">
+            🔥
+          </div>
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500 text-white text-[10px] font-black tracking-wider uppercase mb-1.5">
+              NU TRENDING TODAY
+            </div>
+            <h3 id="spotlightMenuTitle" class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+              กะเพราหมูกรอบคั่วพริกเกลือ
+            </h3>
+            <div class="flex items-center gap-2 mt-2 flex-wrap text-xs">
+              <span class="px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">
+                ⚡ เมนูลับเด็ก มอนอ
+              </span>
+              <span id="spotlightRestaurant" class="text-slate-500 text-xs">
+                ร้านป้าแว่น ประตู 4
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 w-full sm:w-auto shrink-0 justify-end">
+          <a id="trendingMapBtn" href="https://www.google.com/maps/search/?api=1&query=มหาวิทยาลัยนเรศวร+ร้านอาหาร" target="_blank" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:hover:bg-slate-100 dark:text-slate-900 font-bold text-xs sm:text-sm text-center shadow transition flex items-center justify-center gap-2">
+            <span>📍</span> ดูพิกัดบน Google Maps
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal แนะนำเมนูเด็ดรอบ มอนอ โดย User (UGC Form) -->
+  <div id="suggestModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closeSuggestModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">✕</button>
+      
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-2xl mx-auto mb-2.5">
+          🍲
+        </div>
+        <h3 class="text-xl font-black text-slate-900 dark:text-white">แนะนำเมนูเด็ดรอบ มอนอ</h3>
+        <p class="text-xs text-slate-400 mt-1">แบ่งปันร้านโปรดให้เพื่อนๆ นิสิตได้ลิ้มลอง</p>
+      </div>
+
+      <form id="suggestForm" onsubmit="handleSuggestSubmit(event)" class="space-y-3.5 text-left text-xs">
+        <div>
+          <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">ชื่อเมนูเด็ด *</label>
+          <input type="text" id="sugName" required placeholder="เช่น กะเพราหมูกรอบไข่ดาวเค็ม" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-amber-500 transition">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">ชื่อร้าน & โซนรอบ ม. *</label>
+          <input type="text" id="sugRest" required placeholder="เช่น ครัวป้าแว่น ประตู 4 หรือ กะเพราถาด ประตู 5" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-amber-500 transition">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">หมวดหมู่</label>
+            <select id="sugCat" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-amber-500 transition font-medium">
+              <option value="อาหารจานเดียว">อาหารจานเดียว</option>
+              <option value="เมนูเส้น">เมนูเส้น</option>
+              <option value="ต้ม/แกง">ต้ม/แกง</option>
+              <option value="คลีน/สุขภาพ">คลีน/สุขภาพ</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">ราคาโดยประมาณ (฿)</label>
+            <input type="number" id="sugPrice" placeholder="เช่น 50" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-amber-500 transition">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">ทริกการสั่ง / จุดเด่นของจานนี้</label>
+          <input type="text" id="sugNotes" placeholder="เช่น ให้เยอะมาก ข้าวฟรี, แนะนำสั่งเผ็ดน้อย" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:border-amber-500 transition">
+        </div>
+
+        <button type="submit" id="sugSubmitBtn" class="w-full py-3.5 mt-2 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-lg shadow-amber-500/25 transition transform active:scale-95">
+          ส่งแนะนำเมนูนี้เลย ✨
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/ui_feedback.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KinRaiDee - จัดการเมนูอาหาร</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body { font-family: 'Kanit', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-6 sm:p-10 flex flex-col justify-between">
+
+  <main class="max-w-7xl mx-auto w-full flex-grow">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- คอลัมน์ซ้าย: ฟอร์มกรอกข้อมูล (7 Cols) -->
+      <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
+        
+        <form id="menuEditForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+          
+          <!-- ชื่อเมนูอาหาร -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ชื่อเมนูอาหาร *</label>
+            <input 
+              type="text" 
+              id="menuName" 
+              required 
+              oninput="syncLivePreview()" 
+              placeholder="เช่น ข้าวกะเพราหมูกรอบไข่ดาว" 
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-amber-500 transition"
+            >
+          </div>
+
+          <!-- หมวดหมู่ และ ระดับความเผ็ด -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">หมวดหมู่ *</label>
+              <select 
+                id="menuCategory" 
+                required 
+                onchange="syncLivePreview()" 
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-700 font-medium focus:outline-none focus:border-amber-500 transition"
+              >
+                <option value="อาหารจานเดียว">อาหารจานเดียว</option>
+                <option value="เมนูเส้น">เมนูเส้น</option>
+                <option value="ต้ม/แกง">ต้ม/แกง</option>
+                <option value="คลีน/สุขภาพ">คลีน/สุขภาพ</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">ระดับความเผ็ด (0-3)</label>
+              <select 
+                id="menuSpiciness" 
+                onchange="syncLivePreview()" 
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-700 font-medium focus:outline-none focus:border-amber-500 transition"
+              >
+                <option value="0">0 - ไม่เผ็ดเลย</option>
+                <option value="1">1 - เผ็ดน้อย 🌶️</option>
+                <option value="2">2 - เผ็ดปานกลาง 🌶️🌶️</option>
+                <option value="3">3 - เผ็ดมาก 🌶️🌶️🌶️</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- ราคา และ แคลอรี่ -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">ราคาโดยประมาณ (บาท) *</label>
+              <input 
+                type="number" 
+                id="menuPrice" 
+                oninput="syncLivePreview()" 
+                placeholder="50" 
+                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-amber-500 transition"
+              >
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">พลังงาน (kcal) *</label>
+              <input 
+                type="number" 
+                id="menuCalories" 
+                oninput="syncLivePreview()" 
+                placeholder="500" 
+                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-amber-500 transition"
+              >
+            </div>
+          </div>
+
+          <!-- ลิงก์รูปภาพอาหาร -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ลิงก์รูปภาพอาหาร (URL)</label>
+            <input 
+              type="url" 
+              id="menuImageUrl" 
+              oninput="syncLivePreview()" 
+              placeholder="https://images.unsplash.com/..." 
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-amber-500 transition"
+            >
+          </div>
+
+          <!-- วัตถุดิบหลัก -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-0.5">วัตถุดิบหลัก (คั่นด้วยเครื่องหมายจุลภาค , )</label>
+            <input 
+              type="text" 
+              id="menuIngredients" 
+              oninput="syncLivePreview()" 
+              placeholder="หมูกรอบ, ไข่, ใบกะเพรา, พริก" 
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-amber-500 transition"
+            >
+            <span class="text-[10px] text-slate-400">ใช้สำหรับฟีเจอร์ค้นหาจากของในตู้เย็น</span>
+          </div>
+
+          <!-- ร้านอาหารแนะนำ -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ร้านอาหารแนะนำ (ใช้ปักหมุด Google Maps)</label>
+            <input 
+              type="text" 
+              id="menuRestaurant" 
+              oninput="syncLivePreview()" 
+              placeholder="เช่น กะเพราตาหนวด หน้า ม." 
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-amber-500 transition"
+            >
+          </div>
+
+          <!-- วิธีทำ หรือ เคล็ดลับข้อ -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">วิธีทำ หรือ เคล็ดลับข้อ</label>
+            <textarea 
+              id="menuNotes" 
+              rows="3" 
+              oninput="syncLivePreview()" 
+              placeholder="ระบุวิธีทำหรือส่วนผสมพิเศษสั้นๆ..." 
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-amber-500 transition"
+            ></textarea>
+          </div>
+
+          <!-- ปุ่มกดยืนยัน -->
+          <div class="pt-3 flex items-center justify-end gap-3">
+            <a href="admin.html" class="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 transition">
+              ยกเลิก
+            </a>
+            <button 
+              type="submit" 
+              id="saveBtn" 
+              class="px-6 py-2.5 rounded-xl bg-[#E25C1D] hover:bg-[#c94f17] text-white text-xs font-bold shadow-md transition"
+            >
+              บันทึกข้อมูล
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+      <!-- คอลัมน์ขวา: ตัวอย่างการ์ดอาหารจริง (LIVE PREVIEW) (5 Cols) -->
+      <div class="lg:col-span-5 sticky top-10">
+        <div class="text-xs font-bold text-slate-600 mb-3 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-red-500"></span>
+          <span>ตัวอย่างการ์ดอาหารจริง (LIVE PREVIEW)</span>
+        </div>
+
+        <div class="bg-white rounded-3xl p-5 border border-slate-100 shadow-[0_10px_35px_rgba(0,0,0,0.05)] overflow-hidden">
+          
+          <!-- ภาพในการ์ด -->
+          <div class="relative h-60 rounded-2xl overflow-hidden bg-slate-100">
+            <img 
+              id="prevImage" 
+              src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" 
+              class="w-full h-full object-cover"
+            >
+            <span id="prevCat" class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-900/80 text-white text-[11px] font-bold">
+              อาหารจานเดียว
+            </span>
+            <span id="prevPrice" class="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-500 text-white text-[11px] font-black">
+              0 ฿
+            </span>
+          </div>
+
+          <!-- ข้อมูลในการ์ด -->
+          <div class="pt-4">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <h3 id="prevName" class="text-base font-black text-slate-900 truncate">ชื่อเมนูอาหาร</h3>
+              <span id="prevSpice" class="text-xs text-slate-400 font-semibold shrink-0">ไม่เผ็ด</span>
+            </div>
+
+            <p id="prevNotes" class="text-xs text-slate-400 line-clamp-1 mb-4">
+              ยังไม่ได้ระบุวิธีทำหรือรายละเอียดเพิ่มเติม...
+            </p>
+
+            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
+              <span id="prevCal" class="text-slate-500 font-bold">🔥 0 kcal</span>
+              <span id="prevRest" class="text-slate-400 font-medium truncate max-w-[160px]">📍 ไม่ได้ระบุร้าน</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/ui_feedback.js"></script>
+  <script src="admin_edit.js"></script>
+</body>
+</html>
