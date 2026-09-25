@@ -77,7 +77,7 @@ INITIAL_MENUS = [
         "spiciness": 2,
         "ingredients": "หมูกรอบ, ไข่ดาว, ใบกะเพรา, พริก",
         "restaurant_name": "ร้านอรอรรถรส",
-        "image_url": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&auto=format&fit=crop",
+        "image_url": "https://scontent.fphs2-1.fna.fbcdn.net/v/t39.30808-6/499541780_1200569751760935_3493120337102732027_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=LQ6AR0oebVwQ7kNvwFD8x2i&_nc_oc=Ado1JwqI2WGp_gdEH0J3V5vhevsjzdG-OXE46SfhUBOMIeiXsldGtx6NYWJi6MkvVSk&_nc_zt=23&_nc_ht=scontent.fphs2-1.fna&_nc_gid=OuP0-k--RaUyK7HAinYmNQ&_nc_ss=7b2a8&oh=00_AQKDjM8b6yxDE0Wx0GaLVb2xa1jBrY-D4PMN3DUElI-__A&oe=6ABC01A4",
         "recipe_summary": "ทริก: เมนูที่รีวิวลูกค้าชมบ่อยที่สุดของร้าน หมูกรอบทอดใหม่ ไข่ดาวไข่แดงเยิ้ม ราคาเดิมแค่ 50 บาท",
         "random_count": 58
     },
@@ -293,7 +293,7 @@ INITIAL_MENUS = [
         "spiciness": 0,
         "ingredients": "ไข่, กุ้ง, ปลาหมึก",
         "restaurant_name": "Plearn Restaurant",
-        "image_url": "https://img.wongnai.com/p/1920x0/2019/10/07/6551e029617e4606a351f7cdd77ee85c.jpg",
+        "image_url": "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=600&q=80",
         "recipe_summary": "ทริก: ไข่ตุ๋นเนื้อเนียนนุ่มใส่ของทะเลแน่น เหมาะกินแบ่งกันหลายคน อีกหนึ่งเมนูที่ถูกรีวิวชมตรงๆ",
         "random_count": 13
     },
@@ -305,7 +305,7 @@ INITIAL_MENUS = [
         "spiciness": 0,
         "ingredients": "ครีมชีส, ไข่, น้ำตาล, วิปปิ้งครีม",
         "restaurant_name": "warehouse.nu",
-        "image_url": "https://pacamaracoffee.com/sites/default/files/styles/news_large_image_mobile/public/2025-10/LINE_ALBUM_8568_250508_17.jpg.jpg?itok=JS3mLOZp",
+        "image_url": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80",
         "recipe_summary": "ทริก: รีวิวลูกค้าชมว่าขอบเค้กมีเท็กซ์เจอร์ดี ตรงกลางครีมมี่ไม่หวานเกินไป ถือเป็นเมนูซิกเนเจอร์ของร้าน",
         "random_count": 41
     }

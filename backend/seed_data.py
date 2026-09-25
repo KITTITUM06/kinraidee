@@ -20,7 +20,7 @@ MENUS_NU = [
         2,
         "หมูกรอบ, ไข่ดาว, ใบกะเพรา, พริก",
         "ร้านอรอรรถรส",
-        "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&auto=format&fit=crop",
+        "https://scontent.fphs2-1.fna.fbcdn.net/v/t39.30808-6/499541780_1200569751760935_3493120337102732027_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=LQ6AR0oebVwQ7kNvwFD8x2i&_nc_oc=Ado1JwqI2WGp_gdEH0J3V5vhevsjzdG-OXE46SfhUBOMIeiXsldGtx6NYWJi6MkvVSk&_nc_zt=23&_nc_ht=scontent.fphs2-1.fna&_nc_gid=OuP0-k--RaUyK7HAinYmNQ&_nc_ss=7b2a8&oh=00_AQKDjM8b6yxDE0Wx0GaLVb2xa1jBrY-D4PMN3DUElI-__A&oe=6ABC01A4",
         "ทริก: เมนูที่รีวิวลูกค้าชมบ่อยที่สุดของร้าน หมูกรอบทอดใหม่ ไข่ดาวไข่แดงเยิ้ม ราคาเดิมแค่ 50 บาท",
         58
     ),
