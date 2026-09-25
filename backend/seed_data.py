@@ -20,7 +20,7 @@ MENUS_NU = [
         2,
         "หมูกรอบ, ไข่ดาว, ใบกะเพรา, พริก",
         "ร้านอรอรรถรส",
-        "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&auto=format&fit=crop",
         "ทริก: เมนูที่รีวิวลูกค้าชมบ่อยที่สุดของร้าน หมูกรอบทอดใหม่ ไข่ดาวไข่แดงเยิ้ม ราคาเดิมแค่ 50 บาท",
         58
     ),
@@ -32,7 +32,7 @@ MENUS_NU = [
         1,
         "กุ้ง, ไข่, ข้าวสวย",
         "ร้านอรอรรถรส",
-        "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80",
+        "https://img.wongnai.com/p/1600x0/2020/01/19/a27e8561b8484aca8996ba98996a885a.jpg",
         "ทริก: จานเบสิกแต่คนสั่งประจำ กุ้งเด้งไม่คาว ราคาย่อมเยาที่สุดของร้านแค่ 40 บาท",
         64
     ),
@@ -44,7 +44,7 @@ MENUS_NU = [
         2,
         "กระดูกหมู, พริก, มะนาว",
         "ร้านอรอรรถรส",
-        "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80",
+        "https://assets.unileversolutions.com/recipes-v2/117758.jpg",
         "ทริก: กระดูกหมูตัดเป็นชิ้นใหญ่รสจัดจ้าน สั่งคู่ข้าวกะเพราแล้วอิ่มคุ้มสุด",
         27
     ),
@@ -58,7 +58,7 @@ MENUS_NU = [
         0,
         "หมูสามชั้น, กระเทียม, ข้าวสวย",
         "Rustic Backyard",
-        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+        "https://s359.kapook.com/pagebuilder/cdc10daf-f6fa-4054-b77b-2d700cf2dd9c.jpg",
         "ทริก: เมนูซิกเนเจอร์ที่ถูกชมมากที่สุดในรีวิวร้าน กรอบนอกนุ่มใน กระเทียมเจียวหอมทั้งจาน",
         45
     ),
@@ -70,7 +70,7 @@ MENUS_NU = [
         2,
         "ปลาโดริ่, ใบกะเพรา, พริก",
         "Rustic Backyard",
-        "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=600&q=80",
+        "https://i.pinimg.com/736x/84/2a/ee/842aeecde808c9875c5eed0e886e0cbf.jpg",
         "ทริก: เนื้อปลาโดริ่นุ่มไม่มีก้าง ผัดกะเพราสไตล์ร้านนี้แซ่บกำลังดีตามที่รีวิวลูกค้าแนะนำ",
         39
     ),
@@ -82,7 +82,7 @@ MENUS_NU = [
         0,
         "หมูสไลซ์, กระเทียม, ข้าวสวย",
         "Rustic Backyard",
-        "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=600&q=80",
+        "https://img.wongnai.com/p/1968x0/2021/06/26/a6ba00a5133f4537bf0809b78d2bb2ea.jpg",
         "ทริก: หมูสไลซ์บางนุ่มผัดกระเทียมหอมฟุ้ง เป็นอีกจานที่ลูกค้ารีวิวชมว่าอร่อยมาก",
         22
     ),
@@ -96,7 +96,7 @@ MENUS_NU = [
         0,
         "ไก่, เม็ดมะม่วงหิมพานต์, ข้าวสวย",
         "Have A Seat",
-        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80",
+        "https://kitchenbykate.com/wp-content/uploads/2026/02/kitchenbykate.com-auto-draft-chinese-cashew-chicken-1122x748.jpg",
         "ทริก: หนึ่งในเมนูที่ลูกค้ารีวิวแนะนำให้ลอง ไก่นุ่มเม็ดมะม่วงหิมพานต์คั่วกรอบ",
         18
     ),
@@ -108,7 +108,7 @@ MENUS_NU = [
         2,
         "กุ้ง, กะทิ, พริกแกงแดง",
         "Have A Seat",
-        "https://images.unsplash.com/photo-1548943487-a2e4e43b4853?auto=format&fit=crop&w=600&q=80",
+        "https://img.wongnai.com/p/1968x0/2025/02/11/806daa474c094011aade3d7c0d5d0558.jpg",
         "ทริก: กะทิเข้มข้นแบบไม่หวานจัด เผ็ดกำลังดี ลูกค้ารีวิวชมว่าราคาคุ้มมาก",
         19
     ),
@@ -120,7 +120,7 @@ MENUS_NU = [
         0,
         "เบคอน, ครีม, พาสต้า, ไข่แดง",
         "Have A Seat",
-        "https://images.unsplash.com/photo-1594998893017-36147cbcae05?auto=format&fit=crop&w=600&q=80",
+        "https://i.pinimg.com/736x/52/ad/c6/52adc609f4c5a2769325be2a2bf82a25.jpg",
         "ทริก: ทางเลือกสำหรับคนอยากเปลี่ยนบรรยากาศจากอาหารไทย รสชาติได้รับคำชมจากรีวิวจริง",
         26
     ),
@@ -134,7 +134,7 @@ MENUS_NU = [
         2,
         "ไก่กรอบ, ใบกะเพรา, พริก",
         "Thai Food Diner",
-        "https://images.unsplash.com/photo-1569058242567-93de6f36f8e6?auto=format&fit=crop&w=600&q=80",
+        "https://www.nestleprofessional.co.th/sites/default/files/styles/np_recipe_detail_2x/public/2022-04/crispychicken-basil-plant-based.webp?itok=SAf0FBRm",
         "ทริก: เมนูพิเศษของร้านที่รีวิวลูกค้าบอกว่าราคาสูงกว่าปกตินิดหน่อยแต่รสชาติคุ้มค่า",
         37
     ),
@@ -146,7 +146,7 @@ MENUS_NU = [
         1,
         "ไก่, พริกแกงกะหรี่, ข้าวสวย",
         "Thai Food Diner",
-        "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80",
+        "https://img-global.cpcdn.com/recipes/be039a6b007e6929/1200x630cq80/photo.jpg",
         "ทริก: แกงกะหรี่รสกลมกล่อม ลูกค้ารีวิวชมว่าราคาถูกแต่รสชาติเกินราคา",
         31
     ),
@@ -160,7 +160,7 @@ MENUS_NU = [
         0,
         "ไข่, ข้าวสวย, ผักรวม",
         "The fast อาหารจานด่วน",
-        "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80",
+        "https://img.wongnai.com/p/1920x0/2020/10/18/bc87e81661b44267a76ec81b1f9ba395.jpg",
         "ทริก: ทำเร็วมากตามชื่อร้าน เหมาะมื้อรีบๆ ก่อนเข้าเรียน รีวิวลูกค้าชมความไวและรสชาติ",
         52
     ),
@@ -174,7 +174,7 @@ MENUS_NU = [
         2,
         "บะหมี่, ใบกะเพรา, พริก",
         "แลบัว ณ มอนอ",
-        "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80",
+        "https://tse3.mm.bing.net/th/id/OIP.md3jqFQzOFTV-rjBQ5yt3AHaJ4?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
         "ทริก: นั่งกินริมบึงบัว บรรยากาศชิล เมนูนี้ถูกรีวิวลูกค้าแนะนำโดยตรง",
         50
     ),
@@ -186,7 +186,7 @@ MENUS_NU = [
         3,
         "มะละกอ, พริก, ปลาร้า",
         "แลบัว ณ มอนอ",
-        "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=600&q=80",
+        "https://img.wongnai.com/p/1920x0/2017/11/19/5b35b63f36c54fdfb0765c4e21a2b9ba.jpg",
         "ทริก: สูตรเฉพาะของร้าน เผ็ดแซ่บ รสจัดจ้านตามที่ลูกค้ารีวิวการันตี",
         15
     ),
@@ -200,7 +200,7 @@ MENUS_NU = [
         2,
         "กุ้ง, ปลาหมึก, ลูกชิ้น, บะหมี่, ผักสด",
         "ตำซวดลวด",
-        "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80",
+        "https://tse4.mm.bing.net/th/id/OIP.way6LDtgS3jDN3hbtu88NQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
         "ทริก: ซุปรสกลมกล่อมเปรี้ยวหวานเค็มเผ็ดครบ เส้นนุ่ม ท็อปด้วยกุ้ง ปลาหมึก ลูกชิ้น ผักสด โรยหอมเจียวถั่วลิสงแน่นชาม",
         48
     ),
@@ -214,7 +214,7 @@ MENUS_NU = [
         1,
         "หมูสามชั้น, กระเทียม, ข้าวสวย",
         "ชูรส มอนอ",
-        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+        "https://img-global.cpcdn.com/recipes/a10fe48e34018d8f/1200x630cq80/photo.jpg",
         "ทริก: หมูสามชั้นทอดกรอบผัดจนเข้าเนื้อ ลูกค้ารีวิวบอกว่าเป็นร้านโปรดที่กลับมากินซ้ำบ่อยที่สุด",
         44
     ),
@@ -226,7 +226,7 @@ MENUS_NU = [
         2,
         "ไก่สับ, ใบกะเพรา, พริก",
         "ชูรส มอนอ",
-        "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80",
+        "https://img-global.cpcdn.com/recipes/a10fe48e34018d8f/1200x630cq80/photo.jpg",
         "ทริก: จุดขายของร้านคือไม่ใส่ถั่วฝักยาวปนแบบร้านอื่น เน้นไก่สับกับใบกะเพราล้วนๆ",
         33
     ),
@@ -240,7 +240,7 @@ MENUS_NU = [
         1,
         "เต้าหู้ยี้แดง, บะหมี่, ลูกชิ้นปลา, ผักบุ้ง",
         "Plearn Restaurant",
-        "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=600&q=80",
+        "https://img.wongnai.com/p/1920x0/2022/05/26/5e240e75d91e41c8b6b66a1a80215450.jpg",
         "ทริก: เมนูที่รีวิวลูกค้าแนะนำเป็นพิเศษ กินคู่บรรยากาศเพลงเก่าชิลๆ ยามค่ำ",
         35
     ),
@@ -252,7 +252,7 @@ MENUS_NU = [
         0,
         "ไข่, กุ้ง, ปลาหมึก",
         "Plearn Restaurant",
-        "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=600&q=80",
+        "https://img.wongnai.com/p/1920x0/2019/10/07/6551e029617e4606a351f7cdd77ee85c.jpg",
         "ทริก: ไข่ตุ๋นเนื้อเนียนนุ่มใส่ของทะเลแน่น เหมาะกินแบ่งกันหลายคน อีกหนึ่งเมนูที่ถูกรีวิวชมตรงๆ",
         13
     ),
@@ -266,7 +266,7 @@ MENUS_NU = [
         0,
         "ครีมชีส, ไข่, น้ำตาล, วิปปิ้งครีม",
         "warehouse.nu",
-        "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80",
+        "https://pacamaracoffee.com/sites/default/files/styles/news_large_image_mobile/public/2025-10/LINE_ALBUM_8568_250508_17.jpg.jpg?itok=JS3mLOZp",
         "ทริก: รีวิวลูกค้าชมว่าขอบเค้กมีเท็กซ์เจอร์ดี ตรงกลางครีมมี่ไม่หวานเกินไป ถือเป็นเมนูซิกเนเจอร์ของร้าน",
         41
     )
